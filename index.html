@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/vanillaSlideshow.css">
+<title>Vanila Javascript CSS3 Responsive Slideshow</title>
+</head>
+<body>
+
+<div id="vanilla-slideshow-container">
+
+	<!-- 
+		Slideshow images 
+		you can also use data-src attribute and full path of image to use css background images 
+	-->
+	<div id="vanilla-slideshow">
+		
+		<div class="vanilla-slide">
+			<img class='fotus' src="images/land1.jpg" alt="land">
+			<!-- content here -->
+		</div>
+
+		<div class="vanilla-slide">
+			<img class='fotus' src="images/land2.jpg" alt="land">
+			<!-- content here -->
+		</div>
+		
+		<div class="vanilla-slide">
+			<img class='fotus' src="images/land3.jpg" alt="land">
+			<!-- content here -->
+		</div>
+		
+		<div class="vanilla-slide">
+			<img class='fotus' src="images/land4.jpg" alt="land">
+			<!-- content here -->
+		</div>
+
+	</div>
+
+	<!-- slideshow indicators -->
+	<div id="vanilla-indicators"></div>
+
+	<!-- slideshow arrows -->
+	<div id="vanilla-slideshow-previous">
+		<img src="images/arrow-previous.png" alt="slider arrow">
+	</div>
+	<div id="vanilla-slideshow-next">
+		<img src="images/arrow-next.png" alt="slider arrow">
+	</div>
+
+</div>
+
+<script src="js/vanillaSlideshow.min.js"></script>
+<script>
+	vanillaSlideshow.init({
+		slideshow: true,
+		delay: 2000,
+		arrows: true,
+		indicators: true,
+		random: false,
+		animationSpeed: '1s'
+	});
+
+	console.log(window.orientation)
+	var fotus = document.querySelectorAll(".fotus")
+	if (window.orientation === 0) {
+		for (let index = 0; index < fotus.length; index++) {
+			 fotus[index].src = `images/port${index+1}.jpg`;
+			 fotus[index].classList.add("portrait-fotu")
+		}
+		console.log("showing portrait")
+	} else {
+		console.log("showing landscape")
+	}
+	
+	// Listen for orientation changes
+	window.addEventListener("orientationchange", function() {
+		// Announce the new orientation number
+		if (window.orientation === 0) {
+			for (let index = 0; index < fotus.length; index++) {
+				 fotus[index].src = `images/port${index+1}.jpg`;
+				 fotus[index].classList.add("portrait-fotu")
+			}
+			console.log("showing portrait")
+		} else {
+			for (let index = 0; index < fotus.length; index++) {
+					fotus[index].src = `images/land${index+1}.jpg`;
+					fotus[index].classList.remove("portrait-fotu")
+			}
+			console.log("showing landscape")
+		}
+	}, false);
+</script>
+
+</body>
+</html>
